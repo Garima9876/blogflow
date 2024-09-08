@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { Card, CardHeader, CardBody } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
-export default function BlogCard({ id, title, content }) {
+export default function BlogCard({ blog }) {
   return (
     <Card className="mb-4">
       <CardHeader>
-        <h2 className="text-xl font-bold">{title}</h2>
+        <h2 className="text-xl font-bold">{blog.title}</h2>
       </CardHeader>
-      <CardBody>
-        <p>{content.slice(0, 100)}...</p>
-        <Link href={`/${id}`} className="text-blue-500">
+      <CardContent>
+        <p>{blog.content.slice(0, 100)}...</p>
+        <Link href={`/${blog.id}`} className="text-blue-500">
           Read More
         </Link>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }

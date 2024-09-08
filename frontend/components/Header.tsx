@@ -8,7 +8,7 @@ export default function Header() {
           BlogFlow
         </Link>
         <Link href="/create" className="bg-blue-500 px-4 py-2 rounded">
-          Create Post
+          Create Blog
         </Link>
       </nav>
     </header>

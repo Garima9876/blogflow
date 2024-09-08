@@ -4,21 +4,28 @@ import { useState, useEffect } from 'react';
 import BlogCard from '../components/BlogCard';
 
 export default function HomePage() {
-  const [posts, setPosts] = useState([]);
+  const [blogs, setblogs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/posts')
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch((err) => console.error(err));
+    const fetchblogs = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/blogs');
+        const data = await response.json();
+        setblogs(data);
+      } catch (err) {
+        console.error('Failed to fetch blogs', err);
+      }
+    };
+
+    fetchblogs();
   }, []);
 
   return (
     <main className="container mx-auto py-8">
-      {posts.length > 0 ? (
-        posts.map((post) => <BlogCard key={post.id} {...post} />)
+      {blogs.length > 0 ? (
+        blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
       ) : (
-        <p>No blog posts available.</p>
+        <p>Sorry No blog blogs available</p>
       )}
     </main>
   );
