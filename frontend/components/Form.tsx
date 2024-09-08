@@ -1,13 +1,20 @@
-import { useState } from 'react';
-import ButtonComponent from './ButtonComponent'; // Import the ButtonComponent
+import React, { useState, useEffect } from 'react';
 
 type FormProps = {
   onSubmit: (title: string, content: string) => void;
+  initialTitle?: string;
+  initialContent?: string;
 };
 
-const Form = ({ onSubmit }: FormProps) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const Form: React.FC<FormProps> = ({ onSubmit, initialTitle = '', initialContent = '' }) => {
+  const [title, setTitle] = useState(initialTitle);
+  const [content, setContent] = useState(initialContent);
+
+  // Update state when props change
+  useEffect(() => {
+    setTitle(initialTitle);
+    setContent(initialContent);
+  }, [initialTitle, initialContent]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -40,11 +47,12 @@ const Form = ({ onSubmit }: FormProps) => {
           required
         />
       </div>
-      <ButtonComponent 
-        onClick={handleSubmit} 
-        label="Create Blog" 
-        variant="primary" 
-      />
+      <button 
+        type="submit" 
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Update
+      </button>
     </form>
   );
 };
