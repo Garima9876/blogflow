@@ -4,14 +4,15 @@ import { useState, useEffect } from 'react';
 import BlogCard from '../components/BlogCard';
 
 export default function HomePage() {
-  const [blogs, setblogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
+  // Fetch blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await fetch('http://localhost:3001/blogs');
         const data = await response.json();
-        setblogs(data);
+        setBlogs(data);
       } catch (err) {
         console.error('Failed to fetch blogs', err);
       }
@@ -20,12 +21,32 @@ export default function HomePage() {
     fetchBlogs();
   }, []);
 
+  // Delete blog
+  const deleteBlog = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/blogs/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Remove the deleted blog from the state
+        setBlogs(blogs.filter((blog) => blog.id !== id));
+      } else {
+        console.error('Failed to delete blog');
+      }
+    } catch (err) {
+      console.error('Error deleting blog:', err);
+    }
+  };
+
   return (
     <main className="container mx-auto py-8">
       {blogs.length > 0 ? (
-        blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
+        blogs.map((blog) => (
+          <BlogCard key={blog.id} blog={blog} onDelete={deleteBlog} />
+        ))
       ) : (
-        <p>Sorry No blog blogs available</p>
+        <p>No blogs available.</p>
       )}
     </main>
   );

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ButtonComponent from './ButtonComponent'; // Import the ButtonComponent
 
 type FormProps = {
   onSubmit: (title: string, content: string) => void;
@@ -39,9 +40,11 @@ const Form = ({ onSubmit }: FormProps) => {
           required
         />
       </div>
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Create Blog
-      </button>
+      <ButtonComponent 
+        onClick={handleSubmit} 
+        label="Create Blog" 
+        variant="primary" 
+      />
     </form>
   );
 };
