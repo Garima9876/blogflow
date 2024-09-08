@@ -49,7 +49,7 @@ This project consists of a front-end application built with Next.js and a backen
    yarn start
    ```
 
-   The server will start on port 3000. You can access the API endpoints by visiting `http://localhost:3000` in your web browser.
+   The server will start on port 3001. You can access the API endpoints by visiting `http://localhost:3001` in your web browser.
 
 ## API Endpoints
 
