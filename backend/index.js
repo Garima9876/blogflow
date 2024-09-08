@@ -7,43 +7,43 @@ const port = 3001;
 const db = new sqlite3.Database('./blogflow.db');
 
 db.serialize(() => {
-  db.run('CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, title TEXT, content TEXT)');
+  db.run('CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY, title TEXT, content TEXT)');
 });
 
 app.use(express.json());
 app.use(cors());
 
-// Get all posts
-app.get('/posts', (req, res) => {
-  db.all('SELECT * FROM posts', (err, rows) => {
+// Get all blogs
+app.get('/blogs', (req, res) => {
+  db.all('SELECT * FROM blogs', (err, rows) => {
     if (err) return res.status(500).send(err.message);
     res.json(rows);
   });
 });
 
-// Get a single post
-app.get('/posts/:id', (req, res) => {
+// Get a single blog
+app.get('/blogs/:id', (req, res) => {
   const { id } = req.params;
-  db.get('SELECT * FROM posts WHERE id = ?', [id], (err, row) => {
+  db.get('SELECT * FROM blogs WHERE id = ?', [id], (err, row) => {
     if (err) return res.status(500).send(err.message);
-    if (!row) return res.status(404).send('Post not found');
+    if (!row) return res.status(404).send('Blog not found');
     res.json(row);
   });
 });
 
-// Create a post
-app.post('/posts', (req, res) => {
+// Create a blog
+app.post('/blog', (req, res) => {
   const { title, content } = req.body;
-  db.run('INSERT INTO posts (title, content) VALUES (?, ?)', [title, content], function (err) {
+  db.run('INSERT INTO blogs (title, content) VALUES (?, ?)', [title, content], function (err) {
     if (err) return res.status(500).send(err.message);
     res.status(201).json({ id: this.lastID });
   });
 });
 
-// Delete a post
-app.delete('/posts/:id', (req, res) => {
+// Delete a blog
+app.delete('/blogs/:id', (req, res) => {
   const { id } = req.params;
-  db.run('DELETE FROM posts WHERE id = ?', [id], function (err) {
+  db.run('DELETE FROM blogs WHERE id = ?', [id], function (err) {
     if (err) return res.status(500).send(err.message);
     res.status(204).send();
   });
