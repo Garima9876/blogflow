@@ -30,6 +30,7 @@ export default function BlogPage({ params }: { params: { id: string } }) {
         }
         const data = await response.json();
         setBlog(data);
+        setError(null);
       } catch (err) {
         setError(err.message);
       }
