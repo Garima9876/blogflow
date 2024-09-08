@@ -32,7 +32,11 @@ export default function BlogPage({ params }: { params: { id: string } }) {
         setBlog(data);
         setError(null);
       } catch (err) {
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       }
     };
 
@@ -51,7 +55,11 @@ export default function BlogPage({ params }: { params: { id: string } }) {
 
       router.push("/");
     } catch (err) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
