@@ -7,7 +7,7 @@ export default function HomePage() {
   const [blogs, setblogs] = useState([]);
 
   useEffect(() => {
-    const fetchblogs = async () => {
+    const fetchBlogs = async () => {
       try {
         const response = await fetch('http://localhost:3001/blogs');
         const data = await response.json();
@@ -17,7 +17,7 @@ export default function HomePage() {
       }
     };
 
-    fetchblogs();
+    fetchBlogs();
   }, []);
 
   return (

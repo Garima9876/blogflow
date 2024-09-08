@@ -9,7 +9,7 @@ export default function BlogCard({ blog }) {
       </CardHeader>
       <CardContent>
         <p>{blog.content.slice(0, 100)}...</p>
-        <Link href={`/${blog.id}`} className="text-blue-500">
+        <Link href={`/blog/${blog.id}`} className="text-blue-500">
           Read More
         </Link>
       </CardContent>
