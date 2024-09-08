@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type BlogCardProps = {
   blog: {
-    id: string;
+    id: number;
     title: string;
     content: string;
   };

@@ -65,11 +65,10 @@ const Form: React.FC<FormProps> = ({
         />
       </div>
       <div className="flex justify-end space-x-4">
-      <ButtonComponent type="submit" label={buttonLabel} variant="primary" />
+      <ButtonComponent label={buttonLabel} variant="primary" onClick={() => handleSubmit} />
       <ButtonComponent
-        type="button"
         label="Cancel"
-        variant="secondary"
+        variant="danger"
         onClick={handleCancel}
       />
       </div>

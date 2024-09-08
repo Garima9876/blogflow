@@ -29,7 +29,11 @@ export default function CreatePage() {
         router.push('/');
       }, 1000);
     } catch (err) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
       setSuccess(false);
     }
   };

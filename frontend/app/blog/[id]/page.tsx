@@ -95,13 +95,11 @@ export default function BlogPage({ params }: { params: { id: string } }) {
               </DialogDescription>
               <DialogFooter>
                 <ButtonComponent
-                  type="button"
                   label="Cancel"
                   variant="primary"
                   onClick={() => setShowDialog(false)}
                 />
                 <ButtonComponent
-                  type="submit"
                   label="Delete"
                   variant="danger"
                   onClick={() => {
