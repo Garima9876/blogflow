@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import ButtonComponent from "./ButtonComponent";
 
 type FormProps = {
   onSubmit: (title: string, content: string) => void;
   initialTitle?: string;
   initialContent?: string;
+  buttonLabel: string;
 };
 
-const Form: React.FC<FormProps> = ({ onSubmit, initialTitle = '', initialContent = '' }) => {
+const Form: React.FC<FormProps> = ({
+  onSubmit,
+  initialTitle = "",
+  initialContent = "",
+  buttonLabel,
+}) => {
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
+  const router = useRouter();
 
   // Update state when props change
   useEffect(() => {
@@ -23,10 +32,16 @@ const Form: React.FC<FormProps> = ({ onSubmit, initialTitle = '', initialContent
     }
   };
 
+  const handleCancel = () => {
+    router.push("/");
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="title" className="block text-gray-700">Title</label>
+        <label htmlFor="title" className="block text-gray-700">
+          Title
+        </label>
         <input
           id="title"
           type="text"
@@ -37,7 +52,9 @@ const Form: React.FC<FormProps> = ({ onSubmit, initialTitle = '', initialContent
         />
       </div>
       <div>
-        <label htmlFor="content" className="block text-gray-700">Content</label>
+        <label htmlFor="content" className="block text-gray-700">
+          Content
+        </label>
         <textarea
           id="content"
           value={content}
@@ -47,12 +64,15 @@ const Form: React.FC<FormProps> = ({ onSubmit, initialTitle = '', initialContent
           required
         />
       </div>
-      <button 
-        type="submit" 
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Update
-      </button>
+      <div className="flex justify-end space-x-4">
+      <ButtonComponent type="submit" label={buttonLabel} variant="primary" />
+      <ButtonComponent
+        type="button"
+        label="Cancel"
+        variant="secondary"
+        onClick={handleCancel}
+      />
+      </div>
     </form>
   );
 };

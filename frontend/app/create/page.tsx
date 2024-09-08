@@ -39,7 +39,7 @@ export default function CreatePage() {
       <h1 className="text-2xl font-bold mb-4">Create New Blog</h1>
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">Blog created successfully! Redirecting...</p>}
-      <Form onSubmit={handleSubmit} />
+      <Form onSubmit={handleSubmit} buttonLabel="Create" />
     </main>
   );
 }

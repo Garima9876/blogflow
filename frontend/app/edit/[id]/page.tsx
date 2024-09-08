@@ -1,9 +1,8 @@
 "use client";
 
-// app/edit/[id]/page.tsx
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import Form from '../../../components/Form'; // Adjust the import path if needed
+import Form from '../../../components/Form';
 
 export default function EditBlogPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -37,7 +36,7 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
       });
 
       if (response.ok) {
-        router.push('/'); // Redirect to homepage after successful update
+        router.push('/');
       } else {
         console.error('Failed to update blog');
       }
@@ -53,6 +52,7 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
         onSubmit={handleUpdateBlog}
         initialTitle={blog.title}
         initialContent={blog.content}
+        buttonLabel="Update"
       />
     </div>
   );
