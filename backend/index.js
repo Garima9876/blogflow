@@ -49,6 +49,22 @@ app.delete('/blogs/:id', (req, res) => {
   });
 });
 
+// Edit a blog (update title and content)
+app.put('/blogs/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  db.run(
+    'UPDATE blogs SET title = ?, content = ? WHERE id = ?',
+    [title, content, id],
+    function (err) {
+      if (err) return res.status(500).send(err.message);
+      if (this.changes === 0) return res.status(404).send('Blog not found');
+      res.status(200).send('Blog updated successfully');
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log(`Backend API running on http://localhost:${port}`);
 });
